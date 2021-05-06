@@ -30,5 +30,8 @@ namespace Business.Constants
         public static string UserDeleted = "Kullanıcı silindi";
         public static string UserUpdated = "Kullanıcı güncellendi";
         public static string RentalNotComeBack = "Araç teslim edilmedi";
+        public static string CarNameAlreadyExists="Böyle bir isim zaten mevcut ";
+        public static string ImageLimit="Bir arabaya 5 ten fazla resim koyulamaz";
+        public static string ImageUpdate= "Resim güncellendi";
     }
 }
