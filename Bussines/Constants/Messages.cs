@@ -33,5 +33,13 @@ namespace Business.Constants
         public static string CarNameAlreadyExists="Böyle bir isim zaten mevcut ";
         public static string ImageLimit="Bir arabaya 5 ten fazla resim koyulamaz";
         public static string ImageUpdate= "Resim güncellendi";
+        public static string ManyCategories;
+        public static string AuthorizationDenied = "Yetkiniz yok.";
+        public static string UserRegistered;
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Şifre hatalı.";
+        public static string SuccessfulLogin;
+        internal static string UserAlreadyExists = "Bu kullanıcı zaten giriş yapmıştı";
+        internal static string AccessTokenCreated;
     }
 }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Business.Constants;
+using Bussines.BusinessAspects;
 using Bussines.Concrete;
 using Bussines.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.BusinessRules;
 using Core.Utilities.Results;
@@ -20,11 +22,14 @@ namespace Bussines.Abstract
         {
             _carDal = carDal;
         }
+
+        [SecuredOperation("car.add")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
+        [CacheAspect]
         public IResult Add(Car car)
         {
             BusinessRules.Run(CheckCarNameIsSame(car.CarName));
-
 
             _carDal.Add(car);
             return new SuccessResult(Messages.DataAdded);
@@ -35,7 +40,7 @@ namespace Bussines.Abstract
             _carDal.Delete(car);
             return new SuccessResult(Messages.DataDeleted);
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
