@@ -1,40 +1,39 @@
-﻿using DataAccess.Abstract;
+﻿using Core.EntityFramework;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
-using Core.EntityFramework;
+using System.Text;
+
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, RantaCarContext>, IRentalDal
     {
-        public List<RentalDetailDto> GetCarDetails()
+        public List<RentalDetailDto> GetRentalDetails()
         {
-            using (RantaCarContext context = new RantaCarContext())
+            using (RantaCarContext contex = new RantaCarContext())
             {
-                var result = from r in context.Rentals
-                             join c in context.Cars
-                             on r.CarId equals c.Id
-                             join cs in context.Customers
-                             on r.CustomerId equals cs.id
-                             join b in context.Brands
-                             on c.BrandId equals b.Id
-                             join u in context.Users
-                             on cs.UserId equals u.Id
+                var result = from rental in contex.Rentals
+                             join customer in contex.Customers on rental.CustomerId equals customer.id
+                             join user in contex.Users on customer.UserId equals user.Id
+                             join car in contex.Cars on rental.CarId equals car.Id
+                             join brand in contex.Brands on car.BrandId equals brand.Id
                              select new RentalDetailDto
                              {
-                                 RentalId = r.Id,
-                                 CarName = b.BrandName,
-                                 CustomerName = u.FirstName + " " + u.LastName,
-                                 UserName = u.FirstName + " " + u.LastName,
-                                 RentDate = r.RentDate,
-                                 ReturnDate = r.ReturnDate,
-                                 DailyPrice = c.DailyPrice,
-                                 TotalPrice = Convert.ToDecimal(r.ReturnDate.Value.Day - r.RentDate.Day) * c.DailyPrice
+                                 Id = rental.Id,
+                                 CustomerName = user.FirstName + " " +user.LastName,
+                                 CarName = brand.BrandName,
+                                 RentDate = rental.RentDate,
+                                 ReturnDate = rental.ReturnDate,
+                                 DailyPrice=car.DailyPrice,
+                                 TotalPrice= Convert.ToDecimal(rental.ReturnDate.Value.Day - rental.RentDate.Day) * car.DailyPrice
+
                              };
                 return result.ToList();
             }

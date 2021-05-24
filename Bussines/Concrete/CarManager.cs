@@ -12,6 +12,7 @@ using Core.Utilities.BusinessRules;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Bussines.Abstract
 {
@@ -65,5 +66,11 @@ namespace Bussines.Abstract
                 return new ErrorResult(Messages.CarNameAlreadyExists);
             return new SuccessResult();
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.CarListed);
+        }
+
     }
 }

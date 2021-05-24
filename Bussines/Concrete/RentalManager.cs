@@ -52,11 +52,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id== rentalId));
         }
-
-        public IDataResult<List<RentalDetailDto>> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
-            //Buraya bakılacak!!!
-            return null;
+           return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(),"Kiralamalar Listelendi");
         }
 
         public IResult Update(Rental rental)

@@ -39,7 +39,7 @@ namespace Business.Constants
         public static string UserNotFound = "Kullanıcı Bulunamadı";
         public static string PasswordError = "Şifre hatalı.";
         public static string SuccessfulLogin;
-        internal static string UserAlreadyExists = "Bu kullanıcı zaten giriş yapmıştı";
-        internal static string AccessTokenCreated;
+        public static string UserAlreadyExists = "Bu kullanıcı zaten giriş yapmıştı";
+        public static string AccessTokenCreated="Token Oluşturuldu.";
     }
 }
