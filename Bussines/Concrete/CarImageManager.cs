@@ -93,6 +93,11 @@ namespace Bussines.Concrete
 
             return new SuccessResult(Messages.ImageUpdate);
         }
+
+        public IDataResult<CarImage> getByCar(int carId)
+        {
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarId == carId && c.Default==true));
+        }
     }
     }
 

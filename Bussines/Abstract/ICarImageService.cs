@@ -18,5 +18,6 @@ namespace Bussines.Abstract
         IDataResult<List<CarImage>> GetImagesByCarId(int CarId);
 
         IResult TransactionalOperation(CarImage carImage, IFormFile file);
+        IDataResult<CarImage> getByCar(int carId);
     }
 }

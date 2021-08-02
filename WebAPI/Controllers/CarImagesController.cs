@@ -61,6 +61,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbycar")]
+        public IActionResult getByCar(int carId)
+        {
+            var result = _carImageService.getByCar(carId);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result);
+        }
+
+
         [HttpPost("transaction")]
         public IActionResult TransactionTest([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
         {
