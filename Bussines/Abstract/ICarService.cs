@@ -15,5 +15,7 @@ namespace Bussines.Concrete
         IResult Update(Car car);
         IResult Delete(Car car);
         IDataResult<List<CarDetailDto>> GetCarDetails();
+        IDataResult<List<CarDetailDto>> GetCarsByBrand(int brandId);
+        IDataResult<List<CarDetailDto>> GetCarsByColor(int colorId);
     }
 }

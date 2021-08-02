@@ -72,5 +72,14 @@ namespace Bussines.Abstract
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.CarListed);
         }
 
+        public IDataResult<List<CarDetailDto>> GetCarsByBrand(int brandId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsByBrand(brandId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByColor(int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsByColor(colorId));
+        }
     }
 }
