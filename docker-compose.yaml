@@ -1,0 +1,9 @@
+version : '3'
+services:
+    api:
+      image: webapi:2.0
+      container_name: brave_gauss
+      build:
+        context: .
+      ports: 
+        - 8080:5000
