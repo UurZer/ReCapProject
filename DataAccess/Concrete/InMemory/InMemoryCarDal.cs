@@ -10,7 +10,7 @@ using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryCarDal : ICarDal
+    public class InMemoryCarDal 
     {
         List<Car> _cars;
         public InMemoryCarDal()
@@ -59,6 +59,11 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
+        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
             Car carToUpdate = _cars.SingleOrDefault(p => p.Id == car.Id);
@@ -68,11 +73,6 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.BrandId = car.BrandId;
             carToUpdate.ModelYear = car.ModelYear;
 
-        }
-
-        List<CarDetailDto> ICarDal.GetCarDetails()
-        {
-            throw new NotImplementedException();
         }
     }
 }
