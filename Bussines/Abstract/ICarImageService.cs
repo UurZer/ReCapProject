@@ -4,6 +4,7 @@ using System.Text;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 
 namespace Bussines.Abstract
@@ -18,6 +19,6 @@ namespace Bussines.Abstract
         IDataResult<List<CarImage>> GetImagesByCarId(int CarId);
 
         IResult TransactionalOperation(CarImage carImage, IFormFile file);
-        IDataResult<CarImage> getByCar(int carId);
+        IDataResult<List<CarImagesDetailDto>> GetCarDetail(int carId);
     }
 }

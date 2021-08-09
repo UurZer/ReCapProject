@@ -12,6 +12,7 @@ using Core.Utilities.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 
 namespace Bussines.Concrete
@@ -94,9 +95,9 @@ namespace Bussines.Concrete
             return new SuccessResult(Messages.ImageUpdate);
         }
 
-        public IDataResult<CarImage> getByCar(int carId)
+        public IDataResult<List<CarImagesDetailDto>> GetCarDetail(int carId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarId == carId && c.Default==true));
+            return new SuccessDataResult<List<CarImagesDetailDto>>(_carImageDal.getCarDetail(carId));
         }
     }
     }
