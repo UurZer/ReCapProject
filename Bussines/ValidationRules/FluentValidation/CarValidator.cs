@@ -13,6 +13,7 @@ namespace Bussines.ValidationRules.FluentValidation
             RuleFor(c => c.CarName).NotEmpty();
             RuleFor(c => c.CarName).MinimumLength(2);
             RuleFor(c => c.DailyPrice).GreaterThan(10);
+            RuleFor(c => c.CarName).Must(StartWithA);
         }
 
         private bool StartWithA(string arg)
