@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ReCapProject.Acceptance.Tests": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -4,26 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
-
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DeleteMe\Cars\CarApiTests.cs~RF6a968434.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMoq" Version="2.0.0" />
-    <PackageReference Include="FluentAssertions" Version="6.1.0" />
-    <PackageReference Include="FluentValidation" Version="10.3.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
-    <PackageReference Include="RichardSzalay.MockHttp" Version="6.0.0" />
     <PackageReference Include="Tynamix.ObjectFiller" Version="1.5.6" />
-    <PackageReference Include="UmbracoCms.Core" Version="8.16.0" />
-    <PackageReference Include="WireMock.Net" Version="1.4.20" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -37,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bussines\Bussines.csproj" />
-    <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\WebAPI\WebAPI.csproj" />
   </ItemGroup>
 

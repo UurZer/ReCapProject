@@ -24,14 +24,18 @@ namespace Bussines.Abstract
             _carDal = carDal;
         }
 
-        [SecuredOperation("car.add")]
-        [ValidationAspect(typeof(CarValidator))]
-        [CacheRemoveAspect("IProductService.Get")]
-        [CacheAspect]
+        //[SecuredOperation("car.add")]
+        //[ValidationAspect(typeof(CarValidator))]
+        //[CacheRemoveAspect("IProductService.Get")]
+        //[CacheAspect]
         public IResult Add(Car car)
         {
-            BusinessRules.Run(CheckCarNameIsSame(car.CarName));
+            if(car==null)
+            {
+                return new ErrorResult(Messages.Invalidcar);
+            }
 
+            BusinessRules.Run(CheckCarNameIsSame(car.CarName));
             _carDal.Add(car);
             return new SuccessResult(Messages.DataAdded);
         }
@@ -49,7 +53,11 @@ namespace Bussines.Abstract
 
         public IDataResult<Car> GetById(int id)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(p=> p.Id == id));
+            var result = _carDal.Get(p => p.Id == id);
+            if(result!=null)
+                return new SuccessDataResult<Car>(result);
+
+            return new ErrorDataResult<Car>(result);
         }
 
         public IResult Update(Car car)

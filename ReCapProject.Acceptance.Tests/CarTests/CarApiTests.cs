@@ -1,68 +1,60 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Bussines.Abstract;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Bussines.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Tynamix.ObjectFiller;
+using WebAPI.Controllers;
 using Xunit;
 
 namespace ReCapProject.CarTests.Acceptance.Tests
 {
-    public class CarApiTests
+    public class CarApiTests//Acceptance
     {
-        private Car CreateRandomCar() =>
-            new Filler<Car>().Create();
+        private readonly EfCarDal mockObject;
 
-        //[ExpectedException(typeof(ValidationException))]
-        [Fact]
-        private void ShouldAddCar()
+        public CarApiTests()
         {
-            var mockObject = new Mock<EfCarDal>() { CallBase = true }.Object;
-            CarManager carManager = new CarManager(mockObject);
+            this.mockObject = new Mock<EfCarDal>() { CallBase = true }.Object;
+        }
+        private Car CreateRandomCar() =>
+           new Filler<Car>().Create();
 
+        [Fact]
+        private void AddCarShouldReallyAddThenDeleteIt()
+        {
+            //given
             Car randomCar = CreateRandomCar();
             randomCar.BrandId = 2;
             randomCar.ColorId = 2;
             Car inputCar = randomCar;
 
+            //when
             mockObject.Add(inputCar);
 
-            var expectedCar = mockObject.Get(p=>p.Id == inputCar.Id);
+            var expectedCar = mockObject.Get(p => p.Id == inputCar.Id);
 
+            //then
             inputCar.Should().BeEquivalentTo(expectedCar);
-
+            //Thread.Sleep(4000);
             mockObject.Delete(expectedCar);
 
         }
 
         [Fact]
-        private void GetCar()
+        private void GetCarsShouldBeNotNull()
         {
-            var mockObject = new Mock<EfCarDal>() { CallBase = true }.Object;
-            CarManager carManager = new CarManager(mockObject);
-            
-            //var randomCar = new Car{
-            //        BrandId = 4,
-            //        ColorId = 3,
-            //        ModelYear = "2020",
-            //        DailyPrice = 450,
-            //        Description = "DİLERSENİZ PEŞİN DİLERSENİZ %30 PEŞİNAT İLE 48 AYA KADAR KENDİ BÜNYEMİZDE VE ANLAŞMALI FİNANS KURULUŞLARI İLE VADELİ BİR ŞEKİLDE BU ARACA  SAHİP OLABİLİRSİNİZ.",
-            //        CarName = "i8",
-            //        Status = true
-            //};
 
-            //Car inputCar = randomCar;
-            //Car expectedCar = inputCar;
-            //Car actualCar = carManager.Add(randomCar).Data;
+            var actualCar = mockObject.GetAll();
 
-            var actualCar = mockObject.GetAll(p=>p.Status== true).Count;
-
-            actualCar.Should().Be(8);
-
-            //mockObject.Setup(m => m.Delete(inputCar));
+            var expected = actualCar.FirstOrDefault();
+            Assert.Equal("2020", expected.ModelYear);
         }
     }
 }
